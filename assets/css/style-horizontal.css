@@ -1,0 +1,270 @@
+:root {
+    --bg-nav: linear-gradient(90deg, #ffb3d9, #d7b8ff, #a9d4ff);
+    --bg-header: linear-gradient(135deg, #ffd1e8, #f7c8ff, #d8e8ff);
+    --bg-footer: #f6d6ec;
+
+    --text-dark: #3f2d4f;
+    --accent-pink: #ff7eb6;
+
+    --shadow-soft: 0 8px 20px rgba(179, 136, 235, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(to bottom, #fff8fc, #f8f4ff);
+}
+
+/* HEADER */
+
+.site-header { /* elementul care are class="site-header" */
+    text-align: center;
+    padding: 40px;
+    background: var(--bg-header);
+    box-shadow: var(--shadow-soft);
+}
+
+.site-header h1 {
+    font-size: 3rem;
+    margin: 0;
+    animation: glow 2s infinite alternate; /* aplica animatia glow definita jos */
+}
+
+.site-header h2 {
+    color: var(--accent-pink);
+}
+
+/* NAV */
+
+.main-nav {
+    background: var(--bg-nav);
+    position: sticky; /* cand dai scroll meniul ramane sus */
+    top: 0; /* se fixeaxa sus la o pixeli */
+    z-index: 100;
+}
+
+.menu {
+    list-style: none; /* scoate bulinele listei */
+    display: flex; /* pune elementele li pe orizontala */
+    justify-content: center; /* centreaza pe mijloc */ 
+    gap: 15px; /* lasa spatiu intre butoanele din meniu */
+    padding: 10px; /* spatiul interior */
+    margin: 0; /* elimina marginile impplicite ale listei */
+}
+
+.menu li {
+    position: relative; /* elementul ramane in locul lui normal si devine punct de referinta pentru copii */
+}
+
+/* DOAR linkurile principale din meniu */
+.menu > li > a {
+    display: block;
+    padding: 12px 20px 12px 75px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: bold;
+    position: relative;
+    transition: 0.3s;
+}
+
+.menu > li > a:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+/* SPRITE DOAR PE MENIUL PRINCIPAL */
+.menu > li > a::before {
+    content: ""; /* fara content nu putem avea before */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 45px;
+    height: 45px; /* dimensiunea unei iconite */
+
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+    background-image: url("../images/menu-sprite.png"); /* pune imaginea sprite  */
+    background-repeat: no-repeat;
+    background-size: 240px 48px; /* dimensiunea imaginei */
+}
+
+.menu-home > a::before { /* cu before creezi un element fals inainte de text */
+    background-position: -4px 0; /* se decupeaza imaginea pentru fiecare buton di meniu */
+}
+
+.menu-search > a::before {
+    background-position: -53px 0;
+}
+
+.menu-profile > a::before {
+    background-position: -98px 0;
+}
+
+.menu-book > a::before {
+    background-position: -142px 0;
+}
+
+.menu-dashboard > a::before {
+    background-position: -191px 0;
+}
+
+/* SUBMENIU */
+
+.submenu {
+    display: none; /* initial submeniu ascuns doar daca are devine block */
+    position: absolute; /* este pozitionat de primul element parint cu position diferit de static */
+    top: calc(100% + 8px); /* cum pozitioneaza fata de parinte e pozitia lui plus un mic gap de 8px */
+    list-style: none;
+    left: 0;
+    background: white;
+    border-radius: 15px;
+    padding: 10px 0;
+    min-width: 220px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu a {
+    display: block; /* devine vizibil apare normal pe pagina */
+    padding: 12px 18px;
+    text-decoration: none;
+    color: var(--text-dark);
+    background: transparent;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.submenu a::before {
+    content: none; /* dezactiveaza sprite urile */
+}
+
+.submenu a:hover {
+    background: #ffe3f1;
+}
+
+.has-submenu:hover > .submenu { /* cand pui mouse ul pe un buton care are submeniu */
+    display: block; /* daca are submeniu il activeaza */
+}
+
+/* CONTENT */
+
+.page-content {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.content-section, /* card, panel */
+.intro-section {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* TABLE */
+
+.table-wrapper {
+    overflow-x: auto; /*face tabelul responsive*/
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+tr:hover {
+    background: #fff0f8;
+}
+
+th {
+    background: #ffd5ea;
+}
+
+/* FORM */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #b388eb;
+    outline: none;
+}
+
+/* CARDS */
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /*daca nu mai ee loc trecce pe urmatorul rand*/
+}
+
+.card {
+    flex: 1; /* toate au aceasi latime */
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: var(--shadow-soft);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ca sa nu fie acoperita sectiunea de navbar */
+#rezervari {
+    scroll-margin-top: 120px; /* ajusteaza daca ai navbar mai mic/mare */
+}
+
+/* FOOTER */
+
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--bg-footer);
+}
+
+/* ANIMATION */
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 12px #c8a2ff;
+    }
+    to {
+        text-shadow: 0 0 35px #8f5cff, 0 0 70px #caa6ff;
+    }
+}

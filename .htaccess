@@ -1,0 +1,9 @@
+Options -Indexes
+
+<FilesMatch "\.(sql|sqlite|sqlite3|db|bak|backup|env|ini|log)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(database\.sql)$">
+    Require all denied
+</FilesMatch>
